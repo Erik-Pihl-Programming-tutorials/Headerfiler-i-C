@@ -1,78 +1,78 @@
 /********************************************************************************
 * main.c: Demonstration av headerfiler i C.
 * 
-*         Headerfiler används i C för att implementera bibliotek, exempelvis
-*         standardbibliotek såsom stdio.h och stdlib.h, samt för att deklarera
-*         och definiera innehåll för användning i en eller flera källkodsfiler,
+*         Headerfiler anvÃ¤nds i C fÃ¶r att implementera bibliotek, exempelvis
+*         standardbibliotek sÃ¥som stdio.h och stdlib.h, samt fÃ¶r att deklarera
+*         och definiera innehÃ¥ll fÃ¶r anvÃ¤ndning i en eller flera kÃ¤llkodsfiler,
 *         exempelvis funktionsdeklarationer, makrodefinitioner, enumerationer 
 *         andra bibliotek med mera. 
 *
-*         Genom att placera innehåll i en headerfil så behöver inte detta 
-*         klistras in manuellt i olika källkodsfiler; i stället krävs enbart
+*         Genom att placera innehÃ¥ll i en headerfil sÃ¥ behÃ¶ver inte detta 
+*         klistras in manuellt i olika kÃ¤llkodsfiler; i stÃ¤llet krÃ¤vs enbart
 *         att headerfilen inkluderas via inkluderingsdirektivet #include,
-*         vilket medför att headerfilens innehåll klistras in i källkodsfilen.
+*         vilket medfÃ¶r att headerfilens innehÃ¥ll klistras in i kÃ¤llkodsfilen.
 * 
-*         Ett standardbibliotek såsom stdio.h inkluderas med <> enligt nedan:
+*         Ett standardbibliotek sÃ¥som stdio.h inkluderas med <> enligt nedan:
 * 
 *         #include <stdio.h>
 * 
-*         När <> används vid inkludering söks headerfilen enbart bland
+*         NÃ¤r <> anvÃ¤nds vid inkludering sÃ¶ks headerfilen enbart bland
 *         C:s standardbibliotek.
 * 
 *         En egenskapad headerfil inkluderas med "" enligt nedan:
 * 
 *         #include "double_array.h"
 * 
-*         När citattecken används såsom ovan söks headerfilen först bland
-*         lokala headerfiler (på aktuell filsökväg). Om denna inte hittas så 
-*         sker sökning bland C:s standardbibliotek.
+*         NÃ¤r citattecken anvÃ¤nds sÃ¥som ovan sÃ¶ks headerfilen fÃ¶rst bland
+*         lokala headerfiler (pÃ¥ aktuell filsÃ¶kvÃ¤g). Om denna inte hittas sÃ¥ 
+*         sker sÃ¶kning bland C:s standardbibliotek.
 * 
-*         För att se till att innehållet i en headerfil inte definieras mer
-*         än en gång, oavsett antalet källkodsfiler denna headerfil inkluderas
-*         i så används så kallade header guards eller include guards, som
+*         FÃ¶r att se till att innehÃ¥llet i en headerfil inte definieras mer
+*         Ã¤n en gÃ¥ng, oavsett antalet kÃ¤llkodsfiler denna headerfil inkluderas
+*         i sÃ¥ anvÃ¤nds sÃ¥ kallade header guards eller include guards, som
 *         skrivs enligt nedan:
 * 
 *         #ifndef HEADERFILENS_NAMN_H_
 *         #define HEADERFILENS_NAMN_H_
 * 
-*         // Mellan #define och #endif placeras headerfilens innehåll.
+*         // Mellan #define och #endif placeras headerfilens innehÃ¥ll.
 * 
 *         #endif 
 *  
-*         För traditionella header guards används ett flerradigt makro för att 
-*         kontrollera så att headerfilens innehåll inte blir definierat med än 
-*         en gång, se HEADERFILENS_NAMN_H_ ovan. Detta makro brukar döpas till 
-*         samma som headerfilen, men enbart med stora bokstäver, ett understreck 
-*         i stället för punkt samt ett avslutande understreck. Detta görs för att 
-*         undvika namnkrock med ett annat makro i ett givet program, så målsättningen
-*         är att makrot döps till ett unikt namn. 
+*         FÃ¶r traditionella header guards anvÃ¤nds ett flerradigt makro fÃ¶r att 
+*         kontrollera sÃ¥ att headerfilens innehÃ¥ll inte blir definierat med Ã¤n 
+*         en gÃ¥ng, se HEADERFILENS_NAMN_H_ ovan. Detta makro brukar dÃ¶pas till 
+*         samma som headerfilen, men enbart med stora bokstÃ¤ver, ett understreck 
+*         i stÃ¤llet fÃ¶r punkt samt ett avslutande understreck. Detta gÃ¶rs fÃ¶r att 
+*         undvika namnkrock med ett annat makro i ett givet program, sÃ¥ mÃ¥lsÃ¤ttningen
+*         Ã¤r att makrot dÃ¶ps till ett unikt namn. 
 * 
-*         Som exempel, för en headerfil döpt double_array.h kan ett flerradigt
-*         makro döpt DOUBLE_ARRAY_H_ användas. När headerfilen double_array.h
-*         inkluderas i en källkodsfil, vilket i praktiken medför att innehållet
-*         klistras in, så sker först kontroll att makrot DOUBLE_ARRAY_H_ inte
-*         har blivit definierat än via direktivet #ifndef, vilket står för
-*         "if not defined". Om detta är sant, så defineras makrots innehåll,
-*         alltså allt mellan #define samt #endif. När makrot (och därmed 
-*         innehållet mellan #define och #endif) har blivit definierat en gång,
-*         så sker inga fler definitioner, då ifall denna headerfil inkluderas
-*         än en gång i en annan källkodsfil så sker kontroll ifall makrot
-*         DOUBLE_ARRAY_H_ har definierats. Eftersom detta makro nu är
-*         definierat så sker ingen ytterligare definition. Innehållet i
-*         headerfilen är dock fortfarande synlig i den fil innehållet har
-*         inkluderats, men det sker alltså inte en ny definition.
+*         Som exempel, fÃ¶r en headerfil dÃ¶pt double_array.h kan ett flerradigt
+*         makro dÃ¶pt DOUBLE_ARRAY_H_ anvÃ¤ndas. NÃ¤r headerfilen double_array.h
+*         inkluderas i en kÃ¤llkodsfil, vilket i praktiken medfÃ¶r att innehÃ¥llet
+*         klistras in, sÃ¥ sker fÃ¶rst kontroll att makrot DOUBLE_ARRAY_H_ inte
+*         har blivit definierat Ã¤n via direktivet #ifndef, vilket stÃ¥r fÃ¶r
+*         "if not defined". Om detta Ã¤r sant, sÃ¥ defineras makrots innehÃ¥ll,
+*         alltsÃ¥ allt mellan #define samt #endif. NÃ¤r makrot (och dÃ¤rmed 
+*         innehÃ¥llet mellan #define och #endif) har blivit definierat en gÃ¥ng,
+*         sÃ¥ sker inga fler definitioner, dÃ¥ ifall denna headerfil inkluderas
+*         Ã¤n en gÃ¥ng i en annan kÃ¤llkodsfil sÃ¥ sker kontroll ifall makrot
+*         DOUBLE_ARRAY_H_ har definierats. Eftersom detta makro nu Ã¤r
+*         definierat sÃ¥ sker ingen ytterligare definition. InnehÃ¥llet i
+*         headerfilen Ã¤r dock fortfarande synlig i den fil innehÃ¥llet har
+*         inkluderats, men det sker alltsÃ¥ inte en ny definition.
 * 
-*         En nyare typ av header guard är direktivet #pragma once, som placeras
-*         längst upp i en fil så att filens innehåll inte definieras mer än en
-*         gång. Detta direktiv har fördelen att det är lättare att skriva samt 
-*         att risken för namnkrockar med de makron som används för reguljära 
-*         header guards elimineras (då detta inte behövs alls). #pragma once 
-*         ingår dock inte i C-standarden och stöds därmed inte för alla 
-*         kompilatorer, till skillnad mot header guards, som stöds universellt. 
-*         Därmed är det inte säkert att #pragma once fungerar för en given
-*         plattform. De flesta kompilatorer stödjer dock #pragma once, så för
-*         det mesta kan detta användas, antingen enbart eller i kombination
-*         med traditionella header guards. I detta exempel används enbart
+*         En nyare typ av header guard Ã¤r direktivet #pragma once, som placeras
+*         lÃ¤ngst upp i en fil sÃ¥ att filens innehÃ¥ll inte definieras mer Ã¤n en
+*         gÃ¥ng. Detta direktiv har fÃ¶rdelen att det Ã¤r lÃ¤ttare att skriva samt 
+*         att risken fÃ¶r namnkrockar med de makron som anvÃ¤nds fÃ¶r reguljÃ¤ra 
+*         header guards elimineras (dÃ¥ detta inte behÃ¶vs alls). #pragma once 
+*         ingÃ¥r dock inte i C-standarden och stÃ¶ds dÃ¤rmed inte fÃ¶r alla 
+*         kompilatorer, till skillnad mot header guards, som stÃ¶ds universellt. 
+*         DÃ¤rmed Ã¤r det inte sÃ¤kert att #pragma once fungerar fÃ¶r en given
+*         plattform. De flesta kompilatorer stÃ¶djer dock #pragma once, sÃ¥ fÃ¶r
+*         det mesta kan detta anvÃ¤ndas, antingen enbart eller i kombination
+*         med traditionella header guards. I detta exempel anvÃ¤nds enbart
 *         traditionella header guards.
 ********************************************************************************/
 #include "double_array.h"
@@ -80,7 +80,8 @@
 /********************************************************************************
 * main: Deklarerar en flyttalsarray som rymmer 20 flyttal. Denna array fylls
 *       till bredden flyttal i steg om 0.5 (0, 0.5, 1, 1.5 med mera). Arrayens
-*       innehåll sorteras sedan i fallande ordning och skrivs ut i terminalen.
+*       innehÃ¥ll sorteras sedan i fallande ordning och skrivs ut i terminalen.
+*       Slutligen sorteras innehÃ¥llet i stigande ordning och skrivs ut igen.
 ********************************************************************************/
 int main(void)
 {
